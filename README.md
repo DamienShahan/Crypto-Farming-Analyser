@@ -1,0 +1,1 @@
+# Crypto-Farming-Analyser
