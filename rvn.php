@@ -283,11 +283,11 @@ $names = $sql->query($select);
         }
 
     // Warning when rvn block reward is unusally high
-    if($row['rewardBlock']>3) {
+    if($row['rewardBlock']>3000) {
     ?>
         <div class="alert alert-warning" role="alert">
         <b>Careful!</b> Unusually high rvnerum block rewards at the moment: <?php echo $row['rewardBlock']; ?><br>
-        rvnerum block rewards are usually around 2.2<br>
+        rvnerum block rewards are usually around 2500<br>
         <br>
         Unusually high block rewards skew the profit and ROI numbers unrealistically. Please check back in 30 minutes.
         </div>
