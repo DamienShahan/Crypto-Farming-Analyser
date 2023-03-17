@@ -17,7 +17,7 @@ if(isset($_GET['reset'])) {
 
         // Write backup GPU data to csv file    
         // Open a file in write mode ('w')
-        $fp = fopen($coin+'-gpus.csv', 'w');
+        $fp = fopen('etc-gpus.csv', 'w');
         
         // Loop through file pointer and a line
         foreach ($gpuList as $fields) {
@@ -53,7 +53,7 @@ $exchange_rate_usd_chf = $currency['usd'] / $currency['chf'];
 $exchange_rate_chf_usd = $currency['chf'] / $currency['usd'];
 
 // Get ETC data
-$select="SELECT * FROM "+$coin+" ORDER BY lastUpdate DESC Limit 1";
+$select="SELECT * FROM etc ORDER BY lastUpdate DESC Limit 1";
 $result = $sql->query($select);
 $row = $result->fetch_assoc();
 
@@ -65,7 +65,7 @@ if((isset($_POST['newGpuName']) || isset($_POST['delete'])) && $_POST['randcheck
     // If new GPU added
     if(isset($_POST['newGpuName'])) {
         // Get GPU values from CSV file gpus.csv
-        $gpuList = array_map('str_getcsv', file($coin+'-gpus.csv'));
+        $gpuList = array_map('str_getcsv', file('etc-gpus.csv'));
         array_walk($gpuList, function(&$a) use ($gpuList) {
             $a = array_combine($gpuList[0], $a);
         });
@@ -79,7 +79,7 @@ if((isset($_POST['newGpuName']) || isset($_POST['delete'])) && $_POST['randcheck
         $csvdata = array_merge($gpuList, $newGpu);
 
         // Open a file in write mode ('w')
-        $fp = fopen($coin+'-gpus.csv', 'w');
+        $fp = fopen('etc-gpus.csv', 'w');
         
         // Loop through file pointer and a line
         foreach ($csvdata as $fields) {
@@ -91,7 +91,7 @@ if((isset($_POST['newGpuName']) || isset($_POST['delete'])) && $_POST['randcheck
         $addedGpu = true;
 
         /*** Write new GPU data to DB */
-        $insert = "INSERT INTO `"+$coin+"-gpus` (`id`, `name`, `price`, `mhs`, `watt`) VALUES
+        $insert = "INSERT INTO `etcGpus` (`id`, `name`, `price`, `mhs`, `watt`) VALUES
         ('".$_POST['newGpuId']."','".$_POST['newGpuName']."',".$_POST['newGpuPrice'].",".$_POST['newGpuHashrate'].",".$_POST['newGpuWatt'].")
         ";
         $inserten = $sql->query($insert);
@@ -102,7 +102,7 @@ if((isset($_POST['newGpuName']) || isset($_POST['delete'])) && $_POST['randcheck
         #print_r($_POST['delete']);
 
         // Get GPU values from CSV file gpus.csv
-        $gpuList = array_map('str_getcsv', file($coin+'-gpus.csv'));
+        $gpuList = array_map('str_getcsv', file('etc-gpus.csv'));
         array_walk($gpuList, function(&$a) use ($gpuList) {
             $a = array_combine($gpuList[0], $a);
         });
@@ -121,7 +121,7 @@ if((isset($_POST['newGpuName']) || isset($_POST['delete'])) && $_POST['randcheck
         }
 
         // Open a file in write mode ('w')
-        $fp = fopen($coin+'-gpus.csv', 'w');
+        $fp = fopen('etc-gpus.csv', 'w');
         
         // Loop through file pointer and a line
         foreach ($gpuList as $fields) {
@@ -150,7 +150,7 @@ if(isset($_POST['powercost'])) {
         $gpuList[] = $gpudata;
 
         /*** Write new GPU data to DB */
-        $insert = "INSERT INTO `"+$coin+"-gpus` (`id`, `name`, `price`, `mhs`, `watt`) VALUES
+        $insert = "INSERT INTO `etcGpus` (`id`, `name`, `price`, `mhs`, `watt`) VALUES
         ('".$_POST['id'][$counter]."','".$_POST['name'][$counter]."',".$_POST['price'][$counter].",".$_POST['mhs'][$counter].",".$_POST['watt'][$counter].")
         ";
         $inserten = $sql->query($insert);
@@ -166,7 +166,7 @@ if(isset($_POST['powercost'])) {
     $csvdata = array_merge($header, $gpuList);
     
     // Open a file in write mode ('w')
-    $fp = fopen($coin+'-gpus.csv', 'w');
+    $fp = fopen('etc-gpus.csv', 'w');
     
     // Loop through file pointer and a line
     foreach ($csvdata as $fields) {
@@ -180,7 +180,7 @@ else {
     $poolfee = $defaultPoolfee;
 
     // Get GPU values from CSV file gpus.csv
-    $gpuList = array_map('str_getcsv', file($coin+'-gpus.csv'));
+    $gpuList = array_map('str_getcsv', file('etc-gpus.csv'));
     array_walk($gpuList, function(&$a) use ($gpuList) {
         $a = array_combine($gpuList[0], $a);
     });
