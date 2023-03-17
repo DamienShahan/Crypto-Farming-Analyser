@@ -1,0 +1,4 @@
+AuthName "Crypto Spreadsheet"
+AuthUserFile /home/robinhoo/crypto.robinhood-seo.com/.htpasswd
+AuthType Basic
+Require valid-user
