@@ -236,7 +236,7 @@ $rand=rand();
 $_SESSION['rand']=$rand;
 
 // Get all used GPU names from DB
-$select="SELECT distinct(name) FROM gpus ORDER BY name ASC";
+$select="SELECT distinct(name) FROM etcGpus ORDER BY name ASC";
 $names = $sql->query($select);
 
 ?>
