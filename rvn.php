@@ -185,6 +185,11 @@ else {
         $a = array_combine($gpuList[0], $a);
     });
     array_shift($gpuList); # remove column header
+
+    // Sort the array by 'name' in descending order
+    usort($gpuList, function($a, $b) {
+        return strcmp($b['name'], $a['name']); // Use strcmp for string comparison
+    });
 }
 
 #print_r($gpuList[0]);
@@ -200,7 +205,7 @@ for ($counter = 0; $counter < sizeof($gpuList); $counter++) {
     $gpuList[$counter] += [
         "revenuePerDay" => round($gpuList[$counter]['rvnPerDay']*$row['rvnUsd'],2),
         "revenueCHFPerDay" => round($gpuList[$counter]['rvnPerDay']*$row['rvnUsd']*$exchange_rate_usd_chf,2),
-        "profitPerDay" => round($gpuList[$counter]['rvnPerDay']*$row['rvnUsd']-$gpuList[$counter]['powerCostPerDay'],2),
+        "profitPerDay" => round($gpuList[$counter]['rvnPerDay']*$row['rvnUsd']-($gpuList[$counter]['powerCostPerDay']*$exchange_rate_chf_usd),2),
         "profitCHFPerDay" => round($gpuList[$counter]['rvnPerDay']*$row['rvnUsd']*$exchange_rate_usd_chf-$gpuList[$counter]['powerCostPerDay'],2),
     ];
 }
