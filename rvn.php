@@ -567,7 +567,7 @@ RVN Price:              $<?php echo $row['rvnUsd']; ?>
 Mining Difficulty:      <?php echo $row['difficulty']; ?> 
 Block Reward:           <?php echo $row['rewardBlock']; ?> rvn</pre></figure>
     </div>
-    <div class="content">
+    <div class="content hidden_values">
         <p style="margin-bottom:10px;"><strong>To Do:</strong></p>
     <figure><pre>
 - Optimize display of GPU price trend line
