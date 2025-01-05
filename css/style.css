@@ -233,6 +233,11 @@ button, input[type=submit] {
 }
 .input_units label {
     font-weight: bold;
+    text-align: right;
+    width: 60px;
+}
+label.units[for="powercost"] {
+    width: 130px;
 }
 .input_units input {
     width: 100%;
